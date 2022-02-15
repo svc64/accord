@@ -81,13 +81,13 @@ final class ChannelViewViewModel: ObservableObject {
                         self.avatars[person.user.id] = avatar
                     }
                     if let roles = person.roles {
-                        var rolesTemp: [String?] = Array(repeating: nil, count: 100)
+                        var rolesTemp: [Int : String] = [:]
                         for role in roles {
                             if let roleColor = roleColors[role]?.1 {
                                 rolesTemp[roleColor] = role
                             }
                         }
-                        let temp: [String] = (rolesTemp.compactMap { $0 }).reversed()
+                        let temp: [String] = (rolesTemp.compactMap { $0.value }).reversed()
                         if !(temp.isEmpty) {
                             DispatchQueue.main.async {
                                 self.roles[person.user.id] = temp[0]
@@ -207,13 +207,13 @@ final class ChannelViewViewModel: ObservableObject {
             avatars[person.user.id] = avatar
         }
         if let roles = person.roles {
-            var rolesTemp: [String?] = Array(repeating: nil, count: 100)
+            var rolesTemp: [Int : String] = [:]
             for role in roles {
                 if let roleColor = roleColors[role]?.1 {
                     rolesTemp[roleColor] = role
                 }
             }
-            let temp: [String] = rolesTemp.compactMap { $0 }.reversed()
+            let temp: [String] = rolesTemp.compactMap { $0.value }.reversed()
             if !(temp.isEmpty) {
                 DispatchQueue.main.async {
                     self.roles[person.user.id] = temp[0]
